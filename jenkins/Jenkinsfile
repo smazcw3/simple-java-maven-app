@@ -6,12 +6,16 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -Denforcer.skip=true clean install'
+                dir("simple-java-maven-app") {
+                    sh 'mvn -Denforcer.skip=true clean install'
+                }
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn -Denforcer.skip=true test'
+                dir("simple-java-maven-app") {
+                    sh 'mvn -Denforcer.skip=true test'
+                }
             }
             post {
                 always {
